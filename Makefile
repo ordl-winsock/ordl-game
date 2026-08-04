@@ -26,6 +26,8 @@ ifeq ($(DEBUG),1)
   CFLAGS += -g -O0 -DDEBUG -DFGE_ENABLE_HEAP_TRACKING=1 \
             -fsanitize=address,undefined -fno-omit-frame-pointer
   LDFLAGS += -fsanitize=address,undefined
+else ifeq ($(NO_LTO),1)
+  CFLAGS += -O2 -DNDEBUG -ffast-math -fomit-frame-pointer
 else
   CFLAGS += -O3 -DNDEBUG -ffast-math -flto -fomit-frame-pointer
   LDFLAGS += -flto
